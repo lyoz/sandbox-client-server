@@ -1,0 +1,36 @@
+{
+  "name": "sandbox-client-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:lyoz/sandbox-client-server.git",
+  "author": "lyoz <lyoz@users.noreply.github.com>",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.50",
+    "@types/react-dom": "^16.9.8",
+    "@types/react-router-dom": "^5.1.5",
+    "@typescript-eslint/eslint-plugin": "^4.3.0",
+    "@typescript-eslint/parser": "^4.3.0",
+    "eslint": "^7.10.0",
+    "eslint-config-prettier": "^6.12.0",
+    "eslint-plugin-react": "^7.21.3",
+    "prettier": "^2.1.2",
+    "ts-loader": "^8.0.4",
+    "typescript": "^4.0.3",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack-dev-server",
+    "format": "prettier --write '**/*.{js,ts,tsx}'",
+    "lint": "eslint '**/*.{js,ts,tsx}'",
+    "typecheck": "tsc --noEmit"
+  }
+}
