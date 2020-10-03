@@ -1,5 +1,3 @@
-const path = require("path");
-
 module.exports = {
   module: {
     rules: [
@@ -16,10 +14,5 @@ module.exports = {
   },
   resolve: {
     extensions: [".js", ".ts", ".tsx"],
-  },
-  devtool: "eval-source-map",
-  devServer: {
-    contentBase: path.join(__dirname, "dist"),
-    historyApiFallback: true,
   },
 };

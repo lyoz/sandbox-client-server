@@ -27,7 +27,7 @@
   "overrides": [
     {
       "files": [
-        "webpack.config.js"
+        "webpack.*.js"
       ],
       "rules": {
         "@typescript-eslint/no-var-requires": "off"
