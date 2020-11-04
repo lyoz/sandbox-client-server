@@ -1,6 +1,62 @@
-import React from "react";
-import { Hello } from "./components/Hello";
+import React, { useContext, useEffect, useReducer } from "react";
+import {
+  BrowserRouter,
+  Link,
+  Redirect,
+  Route,
+  RouteProps,
+  Switch,
+} from "react-router-dom";
+import { fetchGet } from "./fetch";
+import { UserContext } from "./contexts/UserContext";
+import { userReducer } from "./reducers/User";
+import { Home, Private, SignIn } from "./routes";
 
-const App: React.FC = () => <Hello compiler="TypeScript" framework="React" />;
+const PrivateRoute: React.FC<RouteProps> = (props) => {
+  const { user } = useContext(UserContext);
+  const isSignedIn = user.name !== "";
+  return isSignedIn ? <Route {...props} /> : <Redirect to="/signin" />;
+};
 
-export { App };
+export const App: React.FC = () => {
+  const [user, dispatch] = useReducer(userReducer, { name: "" });
+
+  useEffect(() => {
+    (async () => {
+      const res = await fetchGet("/user");
+      if (res.ok) {
+        const text = await res.text();
+        dispatch({ type: "SET", name: text });
+      }
+    })();
+  }, []);
+
+  return (
+    <UserContext.Provider value={{ user, dispatch }}>
+      <BrowserRouter>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/signin">Sign In</Link>
+          </li>
+          <li>
+            <Link to="/private">Private</Link>
+          </li>
+        </ul>
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route exact path="/signin">
+            <SignIn />
+          </Route>
+          <PrivateRoute exact path="/private">
+            <Private />
+          </PrivateRoute>
+        </Switch>
+      </BrowserRouter>
+    </UserContext.Provider>
+  );
+};
