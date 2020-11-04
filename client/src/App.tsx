@@ -10,7 +10,7 @@ import {
 import { fetchGet } from "./fetch";
 import { UserContext } from "./contexts/UserContext";
 import { userReducer } from "./reducers/User";
-import { Home, Private, SignIn } from "./routes";
+import { Home, Private, SignIn, SignOut } from "./routes";
 
 const PrivateRoute: React.FC<RouteProps> = (props) => {
   const { user } = useContext(UserContext);
@@ -42,6 +42,9 @@ export const App: React.FC = () => {
             <Link to="/signin">Sign In</Link>
           </li>
           <li>
+            <Link to="/signout">Sign Out</Link>
+          </li>
+          <li>
             <Link to="/private">Private</Link>
           </li>
         </ul>
@@ -51,6 +54,9 @@ export const App: React.FC = () => {
           </Route>
           <Route exact path="/signin">
             <SignIn />
+          </Route>
+          <Route exact path="/signout">
+            <SignOut />
           </Route>
           <PrivateRoute exact path="/private">
             <Private />

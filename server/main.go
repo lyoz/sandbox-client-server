@@ -35,6 +35,16 @@ func sessionRouter() *echo.Echo {
 		return c.NoContent(http.StatusOK)
 	})
 
+	e.POST("/signout", func(c echo.Context) error {
+		sess, _ := session.Get("session", c)
+		if sess.Values["username"] == nil {
+			return echo.ErrBadRequest
+		}
+		sess.Options.MaxAge = -1
+		sess.Save(c.Request(), c.Response())
+		return c.NoContent(http.StatusOK)
+	})
+
 	e.GET("/user", func(c echo.Context) error {
 		sess, _ := session.Get("session", c)
 		username := sess.Values["username"]
